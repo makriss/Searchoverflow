@@ -1,10 +1,10 @@
 app = angular.module('stackModule', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']);
 
-app.controller('apiCtrl', ['$scope', 'restApi', '$log', function(scope, restApi, $log) {
-    console.log("Roar");
+app.controller('apiCtrl', ['$scope', 'restApi', 'processFilters', '$timeout', function(scope, restApi, processFilters, $timeout) {
+
     window.scope = scope;
     scope.filters = {};
-    scope.questionsListing = [];
+    scope.questionsListing = null;
     scope.currentPage = 1;
     scope.maxSize = 5;
     scope.bigTotalItems = 175;
@@ -12,16 +12,20 @@ app.controller('apiCtrl', ['$scope', 'restApi', '$log', function(scope, restApi,
     scope.itemsPerPage = 5;
 
     scope.toggleFiltersDisplay = function(event) {
-        elm = $("#filters-box");
+        let elm = $("#filters-box");
         if (elm.is(":hidden"))
             elm.slideDown();
         else
             elm.slideUp();
     }
 
-    scope.callApi = function(filters) {
-        console.log(filters);
+    scope.callApi = function() {
+        let filters = JSON.parse(JSON.stringify(scope.filters));
+        processFilters.format(filters);
         let promise = restApi.stackApi(filters);
+
+        startTransition();
+
         promise.then(function(data) {
             console.log(data.data);
             scope.questionsListing = data.data.items;
@@ -31,6 +35,21 @@ app.controller('apiCtrl', ['$scope', 'restApi', '$log', function(scope, restApi,
         }, function(data) {
             console.error(data);
         })
+    }
+
+    function startTransition() {
+        let elm = $("#filters-box");
+        if (!elm.is(":hidden"))
+            elm.slideUp();
+
+        let box = $("div#search-box");
+        if (!box.hasClass("height-auto")) {
+            box.addClass("height-reduce");
+            $timeout(() => {
+                box.addClass("height-auto");
+                box.removeClass("height-reduce");
+            }, 1000)
+        }
     }
 
     scope.getPageListing = function(page) {
@@ -47,7 +66,6 @@ app.controller('apiCtrl', ['$scope', 'restApi', '$log', function(scope, restApi,
     };
 
     scope.pageChanged = function() {
-        $log.log('Page changed to: ' + scope.currentPage);
         console.log(scope.currentPage);
     };
 
@@ -55,3 +73,26 @@ app.controller('apiCtrl', ['$scope', 'restApi', '$log', function(scope, restApi,
 
 
 }])
+
+app.factory('processFilters', function() {
+    function formatFilters(filters) {
+        for (let f in filters) {
+            if (f.includes('date')) {
+                filters[f] = new Date(filters[f]).getTime() / 1000;
+            } else if (f == "tagged" || f == "nottagged") {
+                // add check for a semicolon delimited list
+            }
+        }
+
+    }
+
+    function resetFilters(filters) {
+        filters = { "order": "desc", "sort": "creation" };
+    }
+
+    return {
+        format: formatFilters,
+        resetFilters: resetFilters
+    }
+
+})

@@ -1,4 +1,4 @@
-app.directive('question', function() {
+app.directive('question', function($window) {
     return {
         restrict: 'E',
         scope: {
@@ -15,6 +15,10 @@ app.directive('question', function() {
                 date = new Date(timestamp * 1000);
                 date = date.toDateString();
                 return date.substring(date.indexOf(" "), date.length).trim()
+            }
+
+            scope.redirectToUrl = function(item) {
+                $window.open(item.link, '_blank');
             }
 
         }

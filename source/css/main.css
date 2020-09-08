@@ -7,11 +7,15 @@ div[ng-controller],
 
 #search-box {
     transition: height 1s;
-    padding: 0 20%;
+    padding: 20px 20%;
 }
 
 .height-reduce {
-    height: 25%;
+    height: 134px;
+}
+
+.height-auto {
+    height: auto;
 }
 
 .box {
@@ -86,4 +90,8 @@ div[ng-controller],
 
 .t_a_c {
     text-align: center;
+}
+
+.pad_t {
+    padding-top: 20%
 }
