@@ -26,75 +26,111 @@
         <div class="box" id="search-box" ng-class="{'height-reduce': questionsListing.length}">
             <div class="box-item" id="search-div">
                 <input class="input-css form-box box-item-wide" type="text" ng-model="filters.q" placeholder="Enter a keyword"> &nbsp; &nbsp;
-                <button class="form-box button button-primary box-item" ng-click="callApi()">Search</button>
+                <!-- <button class="form-box button button-primary box-item" ng-click="callApi()">Search</button> -->
+                <button class="btn btn-primary" type="button" ng-click="callApi()">
+                    <span ng-if="button.loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    <span ng-bind="button.text"></span>
+                  </button>
             </div>
             <div class="break"></div>
             <div class="box-item" style="cursor: pointer;">
                 <span ng-click="toggleFiltersDisplay($event)">Advanced Filters >></span>
             </div>
             <div class="break"></div>
-            <div class="box-item" id="filters-box">
-                <label for="fromdate">From Date</label><input type="date" id="fromdate" ng-model="filters.fromdate">
-                <label for="todate">To Date</label><input type="date" id="todate" ng-model="filters.todate">
-                <label for="order">Order</label>
-                <select id="order" ng-init="filters.order='desc'" ng-model="filters.order">
-                <option value="asc">Ascending</option>
-                <option value="desc">Descending</option>
-            </select>
-                <label for="sort">Sort</label>
-                <select id="sort" ng-init="filters.sort='activity'" ng-model="filters.sort">
-                <option value="activity">Activity</option>
-                <option value="votes">Votes</option>
-                <option value="creation">Creation</option>
-                <option value="relevance">Relevance</option>
-            </select>
-                <label for="accepted">Accepted</label>
-                <select id="accepted" ng-model="filters.accepted">
-                <option value=""></option>
-                <option value="true">True</option>
-                <option value="false">False</option>
-            </select>
-                <label for="answers">Answers</label>
-                <input type="text" id="answers" ng-model="filters.answers">
-                <label for="body">Body</label>
-                <input type="text" id="body" ng-model="filters.body">
-                <label for="title">Title</label>
-                <input type="text" id="title" ng-model="filters.title">
-                <label for="tagged">Tagged</label>
-                <input type="text" id="tagged" ng-model="filters.tagged">
-                <label for="nottagged">Not Tagged</label>
-                <input type="text" id="nottagged" ng-model="filters.nottagged">
-                <label for="user">User</label>
-                <input type="text" id="user" ng-model="filters.user">
-                <label for="url">Url</label>
-                <input type="text" id="url" ng-model="filters.url">
-                <label for="views">Views</label>
-                <input type="text" id="views" ng-model="filters.views">
 
-                <label for="wiki">Wiki</label>
-                <select id="wiki" ng-model="filters.wiki">
-                <option value="" ></option>
-                <option value="true">True</option>
-                <option value="false">False</option>
-            </select>
-                <label for="closed">Closed</label>
-                <select id="closed" ng-model="filters.closed">
-                <option value=""></option>
-                <option value="true">True</option>
-                <option value="false">False</option>
-            </select>
-                <label for="migrated">Migrated</label>
-                <select id="migrated" ng-model="filters.migrated">
-                <option value=""></option>
-                <option value="true">True</option>
-                <option value="false">False</option>
-            </select>
-                <label for="notice">Notice</label>
-                <select id="notice" ng-model="filters.notice">
-                <option value=""></option>
-                <option value="true">True</option>
-                <option value="false">False</option>
-            </select>
+            <!-- Filters -->
+            <div class="box-item" id="filters-box">
+                <span class="m_h"><label for="fromdate">From Date</label><input type="date" id="fromdate" ng-model="filters.fromdate"></span>
+                <span class="m_h"><label for="todate">To Date</label><input type="date" id="todate" ng-model="filters.todate"></span>
+                <span class="m_h">
+                    <label for="order">Order</label>
+                    <select id="order" ng-init="filters.order='desc'" ng-model="filters.order">
+                        <option value="asc">Ascending</option>
+                        <option value="desc">Descending</option>
+                    </select>
+                </span>
+                <span class="m_h">
+                    <label for="sort">Sort</label>
+                    <select id="sort" ng-init="filters.sort='activity'" ng-model="filters.sort">
+                        <option value="activity">Activity</option>
+                        <option value="votes">Votes</option>
+                        <option value="creation">Creation</option>
+                        <option value="relevance">Relevance</option>
+                    </select>
+                </span>
+                <span class="m_h">
+                    <label for="accepted">Accepted</label>
+                    <select id="accepted" ng-model="filters.accepted">
+                        <option value=""></option>
+                        <option value="true">True</option>
+                        <option value="false">False</option>
+                    </select>
+                </span>
+                <span class="m_h">
+                    <label for="answers">Answers</label>
+                    <input type="text" id="answers" ng-model="filters.answers">
+                </span>
+                <span class="m_h">
+                    <label for="body">Body</label>
+                    <input type="text" id="body" ng-model="filters.body">
+                </span>
+                <span class="m_h">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" ng-model="filters.title">
+                </span>
+                <span class="m_h">
+                    <label for="tagged">Tagged</label>
+                    <input type="text" id="tagged" ng-model="filters.tagged">
+                </span>
+                <span class="m_h">
+                    <label for="nottagged">Not Tagged</label>
+                    <input type="text" id="nottagged" ng-model="filters.nottagged">
+                </span>
+                <span class="m_h">
+                    <label for="user">User</label>
+                    <input type="text" id="user" ng-model="filters.user">
+                </span>
+                <span class="m_h">
+                    <label for="url">Url</label>
+                    <input type="text" id="url" ng-model="filters.url">
+                </span>
+                <span class="m_h">
+                    <label for="views">Views</label>
+                    <input type="text" id="views" ng-model="filters.views">
+                </span>
+
+                <span class="m_h">
+                    <label for="wiki">Wiki</label>
+                    <select id="wiki" ng-model="filters.wiki">
+                        <option value="" ></option>
+                        <option value="true">True</option>
+                        <option value="false">False</option>
+                    </select>
+                </span>
+                <span class="m_h">
+                    <label for="closed">Closed</label>
+                    <select id="closed" ng-model="filters.closed">
+                        <option value=""></option>
+                        <option value="true">True</option>
+                        <option value="false">False</option>
+                    </select>
+                </span>
+                <span class="m_h">
+                    <label for="migrated">Migrated</label>
+                    <select id="migrated" ng-model="filters.migrated">
+                        <option value=""></option>
+                        <option value="true">True</option>
+                        <option value="false">False</option>
+                    </select>
+                </span>
+                <span class="m_h">
+                    <label for="notice">Notice</label>
+                    <select id="notice" ng-model="filters.notice">
+                        <option value=""></option>
+                        <option value="true">True</option>
+                        <option value="false">False</option>
+                    </select>
+                </span>
             </div>
 
         </div>

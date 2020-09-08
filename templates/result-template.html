@@ -2,7 +2,7 @@
     <!-- Card first line -->
     <div>
         <div class="col-large v_a_t">
-            <p ng-bind="item.title" class="result-title"></p>
+            <p ng-bind-html="item.title" class="result-title"></p>
         </div>
         <div class="col-small t_a_r v_a_t">
             <span ng-class="item.is_answered?'success-tag': 'warning-tag'" ng-bind="hasAnswered(item.is_answered)"></span>

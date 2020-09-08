@@ -95,3 +95,8 @@ div[ng-controller],
 .pad_t {
     padding-top: 20%
 }
+
+.m_h {
+    margin: 0 3px;
+    white-space: nowrap;
+}

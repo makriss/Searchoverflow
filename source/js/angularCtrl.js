@@ -5,6 +5,7 @@ app.controller('apiCtrl', ['$scope', 'restApi', 'processFilters', '$timeout', fu
     window.scope = scope;
     scope.filters = {};
     scope.questionsListing = null;
+    scope.button = { text: "Search", loading: false };
     scope.currentPage = 1;
     scope.maxSize = 5;
     scope.bigTotalItems = 175;
@@ -20,19 +21,23 @@ app.controller('apiCtrl', ['$scope', 'restApi', 'processFilters', '$timeout', fu
     }
 
     scope.callApi = function() {
+        scope.button = { text: "Fetching...", loading: true };
         let filters = JSON.parse(JSON.stringify(scope.filters));
         processFilters.format(filters);
         let promise = restApi.stackApi(filters);
 
-        startTransition();
 
         promise.then(function(data) {
+            startTransition();
+            scope.button = { text: "Search", loading: false };
             console.log(data.data);
             scope.questionsListing = data.data.items;
             scope.totalItems = data.data.items.length;
             scope.getPageListing();
 
+
         }, function(data) {
+            scope.button = { text: "Search", loading: false };
             console.error(data);
         })
     }
