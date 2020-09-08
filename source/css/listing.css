@@ -1,0 +1,55 @@
+div.result-card {
+    margin: 0px 20px;
+    border-bottom: 1px solid #ced9ee;
+    padding: 20px 0;
+    color: rgb(0 0 0 / 65%);
+    font-size: 0.9em;
+}
+
+div.result-card .result-title {
+    color: rgb(0 0 0 / 80%);
+    font-size: 1.1em;
+}
+
+div.result-card .col-large {
+    width: 80%;
+    display: inline-block;
+}
+
+div.result-card .col-small {
+    width: 19%;
+    display: inline-block;
+}
+
+div.result-card .t_a_r {
+    text-align: right;
+}
+
+div.result-card .v_a_t {
+    vertical-align: top;
+}
+
+div.result-card .one-row {
+    margin-bottom: 1rem;
+}
+
+div.result-card .tags {
+    border: 1px solid rgb(0 0 0 / 28%);
+    border-radius: 25px;
+    padding: 5px 10px;
+    margin-right: 1em;
+}
+
+div.result-card .success-tag {
+    padding: 0.5em 1em;
+    border-radius: 20px;
+    color: white;
+    background: #6ad58f;
+}
+
+div.result-card .warning-tag {
+    padding: 0.5em 1em;
+    border-radius: 20px;
+    color: white;
+    background: #f7c048;
+}

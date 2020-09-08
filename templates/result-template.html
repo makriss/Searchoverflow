@@ -1,0 +1,23 @@
+<div class="result-card" ng-if="item">
+    <!-- Card first line -->
+    <div>
+        <div class="col-large v_a_t">
+            <p ng-bind="item.title" class="result-title"></p>
+        </div>
+        <div class="col-small t_a_r v_a_t">
+            <span ng-class="item.is_answered?'success-tag': 'warning-tag'" ng-bind="hasAnswered(item.is_answered)"></span>
+        </div>
+    </div>
+    <div class="one-row">
+        <label for="posted-on">Posted on: </label>
+        <span id="posted-on" ng-bind="parseDate(item.creation_date)"></span> &nbsp;
+        <label for="upvotes">Upvotes: </label>
+        <span id="upvotes" ng-bind="item.score"></span> &nbsp;
+        <label for="answer-count">Answers: </label>
+        <span id="answer-count" ng-bind="item.answer_count"></span>
+    </div>
+    <div>
+        <span class="tags" ng-repeat="tag in item.tags" ng-bind="tag"></span> &nbsp;
+    </div>
+
+</div>

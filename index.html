@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Stack Overflow Search</title>
+    <script src="libraries/js/jquery3.5.js"></script>
+    <link rel="stylesheet" type="text/css" href="libraries/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="libraries/css/bootstrap-pagination.css">
+    <script src="libraries/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="libraries/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" type="text/css" href="libraries/css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" type="text/css" href="source/css/main.css">
+    <link rel="stylesheet" type="text/css" href="source/css/listing.css">
+    <script src="libraries/js/bootstrap.bundle.min.js"></script>
+    <script src="libraries/js/angular.min.js"></script>
+    <script src="libraries/js/angular-animate.min.js"></script>
+    <script src="libraries/js/angular-sanitize.min.js"></script>
+    <script src="libraries/js/ui-bootstrap-tpls-2.5.0.min.js"></script>
+    <script src="source/js/angularCtrl.js"></script>
+    <script src="source/js/angularService.js"></script>
+</head>
+
+<body ng-app='stackModule'>
+    <div ng-controller="apiCtrl">
+        <div class="box" id="search-box" ng-class="{'height-reduce': questionsListing.length}">
+            <div class="box-item" id="search-div">
+                <input class="input-css form-box box-item-wide" type="text" ng-model="searchText" placeholder="Enter a keyword"> &nbsp; &nbsp;
+                <button class="form-box button button-primary box-item" ng-click="callApi()">Search</button>
+            </div>
+            <div class="break"></div>
+            <div class="box-item" style="cursor: pointer;">
+                <span ng-click="toggleFiltersDisplay($event)">Advanced Filters >></span>
+            </div>
+            <div class="break"></div>
+            <div class="box-item" id="filters-box">
+                <label for="fromdate">From Date</label><input type="date" id="fromdate" ng-model="filters.fromdate">
+                <label for="todate">To Date</label><input type="date" id="todate" ng-model="filters.todate">
+                <label for="order">Order</label>
+                <select id="order" ng-init="filters.order='desc'">
+                <option value="asc" ng-model="filters.order">Ascending</option>
+                <option value="desc" ng-model="filters.order">Descending</option>
+            </select>
+                <label for="sort">Sort</label>
+                <select id="sort" ng-init="filters.sort='activity'">
+                <option value="activity" ng-model="filters.sort">Activity</option>
+                <option value="votes" ng-model="filters.sort">Votes</option>
+                <option value="creation" ng-model="filters.sort">Creation</option>
+                <option value="relevance" ng-model="filters.sort">Relevance</option>
+            </select>
+                <label for="accepted">Accepted</label>
+                <select id="accepted">
+                <option value="" ng-model="filters.accepted"></option>
+                <option value="true" ng-model="filters.accepted">True</option>
+                <option value="false" ng-model="filters.accepted">False</option>
+            </select>
+                <label for="answers">Answers</label>
+                <input type="text" id="answers" ng-model="filters.answers">
+                <label for="body">Body</label>
+                <input type="text" id="body" ng-model="filters.body">
+                <label for="title">Title</label>
+                <input type="text" id="title" ng-model="filters.title">
+                <label for="tagged">Tagged</label>
+                <input type="text" id="tagged" ng-model="filters.tagged">
+                <label for="nottagged">Not Tagged</label>
+                <input type="text" id="nottagged" ng-model="filters.nottagged">
+                <label for="user">User</label>
+                <input type="text" id="user" ng-model="filters.user">
+                <label for="url">Url</label>
+                <input type="text" id="url" ng-model="filters.url">
+                <label for="views">Views</label>
+                <input type="text" id="views" ng-model="filters.views">
+
+                <label for="wiki">Wiki</label>
+                <select id="wiki">
+                <option value="" ng-model="filters.wiki"></option>
+                <option value="true" ng-model="filters.wiki">True</option>
+                <option value="false" ng-model="filters.wiki">False</option>
+            </select>
+                <label for="closed">Closed</label>
+                <select id="closed">
+                <option value="" ng-model="filters.closed"></option>
+                <option value="true" ng-model="filters.closed">True</option>
+                <option value="false" ng-model="filters.closed">False</option>
+            </select>
+                <label for="migrated">Migrated</label>
+                <select id="migrated">
+                <option value="" ng-model="filters.migrated"></option>
+                <option value="true" ng-model="filters.migrated">True</option>
+                <option value="false" ng-model="filters.migrated">False</option>
+            </select>
+                <label for="notice">Notice</label>
+                <select id="notice">
+                <option value="" ng-model="filters.notice"></option>
+                <option value="true" ng-model="filters.notice">True</option>
+                <option value="false" ng-model="filters.notice">False</option>
+            </select>
+            </div>
+
+        </div>
+
+        <!-- Results view -->
+        <div class="row" ng-if="questions.length">
+            <div class="offset-md-3 col-md-6">
+                <question item="item" ng-repeat="item in questions"></question>
+            </div>
+            <br>
+        </div>
+        <div class="t_a_c" ng-if="questions.length">
+            <!-- <div class="offset-md-3"> -->
+            <ul uib-pagination direction-links="false" boundary-links="true" items-per-page="itemsPerPage" total-items="totalItems" ng-model="currentPage" ng-change="getPageListing(currentPage)"></ul>
+            <!-- </div> -->
+        </div>
+    </div>
+</body>
+
+</html>
