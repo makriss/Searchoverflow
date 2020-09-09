@@ -40,18 +40,18 @@
 
             <!-- Filters -->
             <div class="box-item" id="filters-box">
-                <span class="m_h"><label for="fromdate">From Date</label><input type="date" id="fromdate" ng-model="filters.fromdate"></span>
-                <span class="m_h"><label for="todate">To Date</label><input type="date" id="todate" ng-model="filters.todate"></span>
+                <span class="m_h"><label for="fromdate">From Date</label><input type="date" class="input-css" id="fromdate" ng-model="filters.fromdate"></span>
+                <span class="m_h"><label for="todate">To Date</label><input type="date" class="input-css" id="todate" ng-model="filters.todate"></span>
                 <span class="m_h">
                     <label for="order">Order</label>
-                    <select id="order" ng-init="filters.order='desc'" ng-model="filters.order">
+                    <select id="order" class="input-css" ng-init="filters.order='desc'" ng-model="filters.order">
                         <option value="asc">Ascending</option>
                         <option value="desc">Descending</option>
                     </select>
                 </span>
                 <span class="m_h">
                     <label for="sort">Sort</label>
-                    <select id="sort" ng-init="filters.sort='activity'" ng-model="filters.sort">
+                    <select id="sort" class="input-css" ng-init="filters.sort='activity'" ng-model="filters.sort">
                         <option value="activity">Activity</option>
                         <option value="votes">Votes</option>
                         <option value="creation">Creation</option>
@@ -60,7 +60,7 @@
                 </span>
                 <span class="m_h">
                     <label for="accepted">Accepted</label>
-                    <select id="accepted" ng-model="filters.accepted">
+                    <select id="accepted" class="input-css" ng-model="filters.accepted">
                         <option value=""></option>
                         <option value="true">True</option>
                         <option value="false">False</option>
@@ -68,40 +68,40 @@
                 </span>
                 <span class="m_h">
                     <label for="answers">Answers</label>
-                    <input type="text" id="answers" ng-model="filters.answers">
+                    <input type="text" id="answers" class="input-css" ng-model="filters.answers">
                 </span>
                 <span class="m_h">
                     <label for="body">Body</label>
-                    <input type="text" id="body" ng-model="filters.body">
+                    <input type="text" id="body" class="input-css" ng-model="filters.body">
                 </span>
                 <span class="m_h">
                     <label for="title">Title</label>
-                    <input type="text" id="title" ng-model="filters.title">
+                    <input type="text" id="title" class="input-css" ng-model="filters.title">
                 </span>
                 <span class="m_h">
                     <label for="tagged">Tagged</label>
-                    <input type="text" id="tagged" ng-model="filters.tagged">
+                    <input type="text" id="tagged" class="input-css" ng-model="filters.tagged">
                 </span>
                 <span class="m_h">
                     <label for="nottagged">Not Tagged</label>
-                    <input type="text" id="nottagged" ng-model="filters.nottagged">
+                    <input type="text" id="nottagged"class="input-css"  ng-model="filters.nottagged">
                 </span>
                 <span class="m_h">
                     <label for="user">User</label>
-                    <input type="text" id="user" ng-model="filters.user">
+                    <input type="text" id="user" class="input-css" ng-model="filters.user">
                 </span>
                 <span class="m_h">
                     <label for="url">Url</label>
-                    <input type="text" id="url" ng-model="filters.url">
+                    <input type="text" id="url" class="input-css" ng-model="filters.url">
                 </span>
                 <span class="m_h">
                     <label for="views">Views</label>
-                    <input type="text" id="views" ng-model="filters.views">
+                    <input type="text" id="views" class="input-css" ng-model="filters.views">
                 </span>
 
                 <span class="m_h">
                     <label for="wiki">Wiki</label>
-                    <select id="wiki" ng-model="filters.wiki">
+                    <select id="wiki" class="input-css" ng-model="filters.wiki">
                         <option value="" ></option>
                         <option value="true">True</option>
                         <option value="false">False</option>
@@ -109,7 +109,7 @@
                 </span>
                 <span class="m_h">
                     <label for="closed">Closed</label>
-                    <select id="closed" ng-model="filters.closed">
+                    <select id="closed" class="input-css" ng-model="filters.closed">
                         <option value=""></option>
                         <option value="true">True</option>
                         <option value="false">False</option>
@@ -117,7 +117,7 @@
                 </span>
                 <span class="m_h">
                     <label for="migrated">Migrated</label>
-                    <select id="migrated" ng-model="filters.migrated">
+                    <select id="migrated" class="input-css" ng-model="filters.migrated">
                         <option value=""></option>
                         <option value="true">True</option>
                         <option value="false">False</option>
@@ -125,7 +125,7 @@
                 </span>
                 <span class="m_h">
                     <label for="notice">Notice</label>
-                    <select id="notice" ng-model="filters.notice">
+                    <select id="notice" class="input-css" ng-model="filters.notice">
                         <option value=""></option>
                         <option value="true">True</option>
                         <option value="false">False</option>
@@ -144,7 +144,7 @@
         </div>
         <div class="t_a_c" ng-if="questions.length">
             <!-- <div class="offset-md-3"> -->
-            <ul uib-pagination direction-links="false" boundary-links="true" items-per-page="itemsPerPage" total-items="totalItems" ng-model="currentPage" ng-change="getPageListing(currentPage)"></ul>
+            <ul uib-pagination direction-links="false" boundary-links="true" items-per-page="pagination.itemsPerPage" total-items="pagination.totalItems" ng-model="pagination.currentPage" ng-change="getPageListing()"></ul>
             <!-- </div> -->
         </div>
 

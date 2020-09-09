@@ -6,11 +6,13 @@ app.controller('apiCtrl', ['$scope', 'restApi', 'processFilters', '$timeout', fu
     scope.filters = {};
     scope.questionsListing = null;
     scope.button = { text: "Search", loading: false };
-    scope.currentPage = 1;
-    scope.maxSize = 5;
-    scope.bigTotalItems = 175;
-    scope.bigCurrentPage = 1;
-    scope.itemsPerPage = 5;
+    scope.pagination = {
+        currentPage: 1,
+        maxSize: 5,
+        bigTotalItems: 175,
+        bigCurrentPage: 1,
+        itemsPerPage: 5
+    }
 
     scope.toggleFiltersDisplay = function(event) {
         let elm = $("#filters-box");
@@ -26,14 +28,17 @@ app.controller('apiCtrl', ['$scope', 'restApi', 'processFilters', '$timeout', fu
         processFilters.format(filters);
         let promise = restApi.stackApi(filters);
 
+        startTransition();
 
         promise.then(function(data) {
-            startTransition();
             scope.button = { text: "Search", loading: false };
             console.log(data.data);
+
             scope.questionsListing = data.data.items;
-            scope.totalItems = data.data.items.length;
-            scope.getPageListing();
+            scope.pagination.totalItems = data.data.items.length;
+
+            scope.setPage(1);
+            scope.getPageListing(1);
 
 
         }, function(data) {
@@ -58,20 +63,21 @@ app.controller('apiCtrl', ['$scope', 'restApi', 'processFilters', '$timeout', fu
     }
 
     scope.getPageListing = function(page) {
-        page = page || scope.currentPage;
+        console.log(page);
+        page = page || scope.pagination.currentPage;
         let pagedData = scope.questionsListing.slice(
-            (page - 1) * scope.itemsPerPage,
-            page * scope.itemsPerPage
+            (page - 1) * scope.pagination.itemsPerPage,
+            page * scope.pagination.itemsPerPage
         );
         scope.questions = pagedData;
     }
 
     scope.setPage = function(pageNo) {
-        scope.currentPage = pageNo;
+        scope.pagination.currentPage = pageNo;
     };
 
     scope.pageChanged = function() {
-        console.log(scope.currentPage);
+        console.log(scope.pagination.currentPage);
     };
 
 

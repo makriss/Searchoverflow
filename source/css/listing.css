@@ -1,10 +1,17 @@
 div.result-card {
     margin: 0px 20px;
     border-bottom: 1px solid #ced9ee;
-    padding: 20px 0;
+    padding: 20px 10px;
     color: rgb(0 0 0 / 65%);
     font-size: 0.9em;
     cursor: pointer;
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    transition: box-shadow 0.3s;
+}
+
+div.result-card:hover {
+    box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
 }
 
 div.result-card .result-title {
@@ -38,7 +45,9 @@ div.result-card .tags {
     border: 1px solid rgb(0 0 0 / 28%);
     border-radius: 25px;
     padding: 5px 10px;
-    margin-right: 1em;
+    white-space: nowrap;
+    display: inline-block;
+    margin: 0 1em 1em 0;
 }
 
 div.result-card .success-tag {
@@ -46,6 +55,7 @@ div.result-card .success-tag {
     border-radius: 20px;
     color: white;
     background: #6ad58f;
+    white-space: nowrap;
 }
 
 div.result-card .warning-tag {
@@ -53,4 +63,5 @@ div.result-card .warning-tag {
     border-radius: 20px;
     color: white;
     background: #f7c048;
+    white-space: nowrap;
 }

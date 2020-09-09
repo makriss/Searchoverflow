@@ -66,7 +66,11 @@ div[ng-controller],
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid #ced4da;
-    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    /* transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out; */
+}
+
+.input-css:focus {
+    border-color: grey;
 }
 
 .button {
