@@ -44,11 +44,18 @@ app.controller('apiCtrl', ['$scope', 'restApi', 'processFilters', '$timeout', fu
             scope.button = { text: "Search", loading: false };
             console.log(data.data);
 
-            scope.questionsListing = data.data.items;
-            scope.pagination.totalItems = data.data.items.length;
+            if (data.data.error_id) {
+                scope.error_msg = data.data.error_msg;
+                scope.questionsListing = [];
+                scope.pagination.totalItems = [].length;
+            } else {
+                scope.questionsListing = data.data.items;
+                scope.pagination.totalItems = data.data.items.length;
 
-            scope.setPage(1);
-            scope.getPageListing(1);
+                scope.error_msg = defaultMsg;
+                scope.setPage(1);
+                scope.getPageListing(1);
+            }
 
 
         }, function(data) {
