@@ -35,6 +35,7 @@
             <div class="break"></div>
             <div class="box-item" style="cursor: pointer;">
                 <span ng-click="toggleFiltersDisplay($event)">Advanced Filters >></span>
+                <button class="button button-secondary f_r v_h" id="clear-filters" ng-click="clearFilters()">Clear Filters</button>
             </div>
             <div class="break"></div>
 
@@ -44,14 +45,14 @@
                 <span class="m_h"><label for="todate">To Date</label><input type="date" class="input-css" id="todate" ng-model="filters.todate"></span>
                 <span class="m_h">
                     <label for="order">Order</label>
-                    <select id="order" class="input-css" ng-init="filters.order='desc'" ng-model="filters.order">
+                    <select id="order" class="input-css" ng-model="filters.order">
                         <option value="asc">Ascending</option>
                         <option value="desc">Descending</option>
                     </select>
                 </span>
                 <span class="m_h">
                     <label for="sort">Sort</label>
-                    <select id="sort" class="input-css" ng-init="filters.sort='activity'" ng-model="filters.sort">
+                    <select id="sort" class="input-css" ng-model="filters.sort">
                         <option value="activity">Activity</option>
                         <option value="votes">Votes</option>
                         <option value="creation">Creation</option>
@@ -148,9 +149,7 @@
             <!-- </div> -->
         </div>
 
-        <p class="t_a_c pad_t" ng-if="questionsListing.length === 0">
-            No results found!
-        </p>
+        <p class="t_a_c pad_t" ng-if="questionsListing.length === 0" ng-bind="error_msg"></p>
     </div>
 </body>
 

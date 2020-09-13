@@ -3,6 +3,7 @@ app = angular.module('stackModule', ['ngAnimate', 'ngSanitize', 'ui.bootstrap'])
 app.controller('apiCtrl', ['$scope', 'restApi', 'processFilters', '$timeout', function(scope, restApi, processFilters, $timeout) {
 
     window.scope = scope;
+    const defaultMsg = "No results found!";
     scope.filters = {};
     scope.questionsListing = null;
     scope.button = { text: "Search", loading: false };
@@ -14,12 +15,21 @@ app.controller('apiCtrl', ['$scope', 'restApi', 'processFilters', '$timeout', fu
         itemsPerPage: 5
     }
 
+    function initialiseFilters() {
+        scope.filters = { order: 'desc', sort: 'activity' }
+    }
+    initialiseFilters()
+    scope.clearFilters = initialiseFilters;
+
     scope.toggleFiltersDisplay = function(event) {
         let elm = $("#filters-box");
-        if (elm.is(":hidden"))
+        if (elm.is(":hidden")) {
             elm.slideDown();
-        else
+            angular.element("#clear-filters").removeClass("v_h");
+        } else {
             elm.slideUp();
+            angular.element("#clear-filters").addClass("v_h");
+        }
     }
 
     scope.callApi = function() {
@@ -49,8 +59,10 @@ app.controller('apiCtrl', ['$scope', 'restApi', 'processFilters', '$timeout', fu
 
     function startTransition() {
         let elm = $("#filters-box");
-        if (!elm.is(":hidden"))
+        if (!elm.is(":hidden")) {
             elm.slideUp();
+            angular.element("#clear-filters").addClass("v_h");
+        }
 
         let box = $("div#search-box");
         if (!box.hasClass("height-auto")) {
@@ -76,12 +88,6 @@ app.controller('apiCtrl', ['$scope', 'restApi', 'processFilters', '$timeout', fu
         scope.pagination.currentPage = pageNo;
     };
 
-    scope.pageChanged = function() {
-        console.log(scope.pagination.currentPage);
-    };
-
-
-
 
 }])
 
@@ -90,8 +96,6 @@ app.factory('processFilters', function() {
         for (let f in filters) {
             if (f.includes('date')) {
                 filters[f] = new Date(filters[f]).getTime() / 1000;
-            } else if (f == "tagged" || f == "nottagged") {
-                // add check for a semicolon delimited list
             }
         }
 
